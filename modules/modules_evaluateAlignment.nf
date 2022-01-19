@@ -196,7 +196,7 @@ process METRICS {
 }
 
 process GAPS_PROGRESSIVE {
-    container 'edgano/base:latest'
+    #container 'edgano/base:latest'
     tag "GAPS_PROG on $id"
     publishDir "${params.outdir}/gaps", mode: 'copy', overwrite: true
 
@@ -219,7 +219,7 @@ process GAPS_PROGRESSIVE {
 
     script:
     """    
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from Bio import SeqIO
 from decimal import *
 import os
