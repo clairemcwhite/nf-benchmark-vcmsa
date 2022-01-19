@@ -249,7 +249,7 @@ except Exception as E: # CDM added
        globalGap += auxGap
        avgGap = Decimal(globalGap) / Decimal(len(record))
 
-print "NumSeq: ",len(record)," GlobalGap: ",globalGap," AVG_Gap:",round(avgGap,3)
+#print "NumSeq: ",len(record)," GlobalGap: ",globalGap," AVG_Gap:",round(avgGap,3)
 totGapFile.write(str(globalGap))
 alnLenFile.write(str(len(record[0])))
 numSeqFile.write(str(len(record)))
