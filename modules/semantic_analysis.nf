@@ -12,9 +12,10 @@ workflow SEMANTIC_ANALYSIS {
     seqs_and_embeds
     refs_ch
     model
+    batch_correct
      
   main:
-    SEMANTIC_ALIGNER (seqs_and_embeds, model)
+    SEMANTIC_ALIGNER (seqs_and_embeds, model, batch_correct)
 
     if (params.evaluate){
       refs_ch

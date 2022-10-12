@@ -39,6 +39,8 @@ process EVAL_ALIGNMENT {
    
     script:
     """
+    export MAX_N_PID_4_TCOFFEE=99999999
+
     echo 'Is this happening?'
     ## Sum-of-Pairs Score ##
        t_coffee -other_pg aln_compare \
@@ -196,7 +198,6 @@ process METRICS {
 }
 
 process GAPS_PROGRESSIVE {
-    #container 'edgano/base:latest'
     tag "GAPS_PROG on $id"
     publishDir "${params.outdir}/gaps", mode: 'copy', overwrite: true
 
@@ -219,7 +220,7 @@ process GAPS_PROGRESSIVE {
 
     script:
     """    
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 from Bio import SeqIO
 from decimal import *
 import os

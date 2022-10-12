@@ -58,7 +58,8 @@ params.alignments = "/scratch/gpfs/cmcwhite/alignments/*aln"
 params.align_methods = "CLUSTALO,FAMSA,MAFFT-FFTNS1,MAFFT-GINSI,MAFFT-SPARSECORE,MAFFT,MSAPROBS,PROBCONS,TCOFFEE,UPP,MUSCLE"
 params.layers = false
 params.heads = false
-
+params.padding = 10
+params.batch_correct = false
 
 //CLUSTALW-QUICK,CLUSTALW
 //FAMSA-SLINK,FAMSA-SLINKmedoid,FAMSA-SLINKparttree,FAMSA-UPGMA,FAMSA-UPGMAmedoid,FAMSA-UPGMAparttree
@@ -102,6 +103,8 @@ log.info """\
          Input trees (NEWICK)                           : ${params.trees}
          Input secondary structure mask                 : ${params.secstruct}
          Model                                          : ${params.model}
+         Padding (# X's added to sequence pre-embed     : ${params.padding}
+         Batch correction                               : ${params.batch_correct}
          Embedding layers                               : ${params.layers}
          Embedding heads (file)                         : ${params.heads}
          Alignment methods                              : ${params.align_methods}
@@ -125,7 +128,6 @@ log.info """\
 // import analysis pipelines
 include { TREE_GENERATION } from './modules/treeGeneration'   params(params)
 include { EMBED_GENERATION } from './modules/embedGeneration'   params(params)
-include { REG_ANALYSIS } from './modules/reg_analysis'        params(params)
 include { PROG_ANALYSIS } from './modules/prog_analysis'      params(params)
 include { SEMANTIC_ANALYSIS } from './modules/semantic_analysis'      params(params)
 //include { EVAL_ALIGNMENT } from './modules/modules_evaluateAlignment.nf'   params(params)
@@ -186,7 +188,7 @@ workflow PIPELINE {
           embeds_ch = Channel.fromPath( params.embeds, checkIfExists: true ).map { item -> [ item.baseName.tokenize(".")[0], item] }
       }
       else {
-          embeds_ch = EMBED_GENERATION (seqs_ch, params.layers, params.model, params.heads).embeds
+          embeds_ch = EMBED_GENERATION (seqs_ch, params.layers, params.model, params.heads, params.padding).embeds
      } 
 
      println "embed_ch"
@@ -204,7 +206,7 @@ workflow PIPELINE {
        
 
 
-        SEMANTIC_ANALYSIS(seqs_and_embeds, refs_ch, params.model)
+        SEMANTIC_ANALYSIS(seqs_and_embeds, refs_ch, params.model, params.batch_correct)
         alignment_semantic_r = SEMANTIC_ANALYSIS.out.alignment
     }
 

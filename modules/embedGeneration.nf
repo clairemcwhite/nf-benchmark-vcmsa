@@ -13,7 +13,8 @@ process EMBED_GENERATION {
     tuple val(id), path(seqs)
     val(layers)
     path(model)
-    path(heads)     
+    val(heads)     
+    val(padding)
 
     output:
     tuple val (id), path ("${id}.pkl"), emit: embeds

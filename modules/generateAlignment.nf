@@ -10,17 +10,21 @@ process SEMANTIC_ALIGNER {
     time '1h'
 
     publishDir "${params.outdir}/alignments", pattern: '*.aln', mode: "copy"
+    publishDir "${params.outdir}/alignment_files/${id}", pattern: '*.fasta', mode: "copy"
     errorStrategy 'ignore'
 
 
     input:
     tuple val(id), path(seqs), path(embeddings)
     path(model)
+    val(batch_correct)
 
     output:
     //val align_method, emit: alignMethod
     tuple val (id), path ("${id}.semantic.aln"), emit: alignmentFile
     path ("${id}.semantic.aln")
+    path ("alignment_files_${id}.semantic/*fasta")
+    
     path ".command.trace", emit: metricFile
 
     script:    
