@@ -1,3 +1,5 @@
+
+export MAX_N_PID_4_TCOFFEE=`cat /proc/sys/kernel/pid_max`
 export blast_server_4_CLTCOFFEE=LOCAL
 export protein_db_4_CLTCOFFEE=${params.database_path}
 export VERBOSE_4_DYNAMIC=1

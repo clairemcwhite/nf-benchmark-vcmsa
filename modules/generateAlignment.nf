@@ -10,7 +10,7 @@ process SEMANTIC_ALIGNER {
     time '1h'
 
     publishDir "${params.outdir}/alignments", pattern: '*.aln', mode: "copy"
-    publishDir "${params.outdir}/alignment_files/${id}", pattern: '*.fasta', mode: "copy"
+    publishDir "${params.outdir}/alignment_files/", pattern: 'alignment*/*', mode: "copy"
     errorStrategy 'ignore'
 
 

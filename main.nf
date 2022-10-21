@@ -78,9 +78,9 @@ params.batch_correct = false
 params.buckets = "30"
 
 
-params.progressive_align = true
+params.progressive_align = false
 params.regressive_align = false
-params.semantic_align = true
+params.semantic_align = false
 params.embeds = false
 
 

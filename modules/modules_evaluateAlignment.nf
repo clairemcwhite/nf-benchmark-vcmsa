@@ -39,7 +39,7 @@ process EVAL_ALIGNMENT {
    
     script:
     """
-    export MAX_N_PID_4_TCOFFEE=99999999
+    export MAX_N_PID_4_TCOFFEE=`cat /proc/sys/kernel/pid_max`
 
     echo 'Is this happening?'
     ## Sum-of-Pairs Score ##

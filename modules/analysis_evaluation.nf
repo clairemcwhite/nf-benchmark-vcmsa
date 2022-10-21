@@ -58,6 +58,14 @@ workflow EVALUATION {
             spScore = EVAL_FFTNS1.out.spScore
             colScore = EVAL_FFTNS1.out.colScore
         }
+        if (align_method == "MAFFT-LINSI"){
+            EVAL_MAFFT_LINSI(flavour, alignment_and_ref, align_method, tree_method, bucket_size)
+
+            tcScore = EVAL_MAFFT_LINSI.out.tcScore
+            spScore = EVAL_MAFFT_LINSI.out.spScore
+            colScore = EVAL_MAFFT_LINSI.out.colScore
+        }
+
         if (align_method == "MAFFT-GINSI"){
             EVAL_MAFFT_GINSI(flavour, alignment_and_ref, align_method, tree_method, bucket_size)
 
@@ -127,6 +135,7 @@ include {   METRICS as METRIC_CLUSTALO ;
             METRICS as METRIC_FAMSA ; 
             METRICS as METRIC_FFTNS1 ;
             METRICS as METRIC_MAFFT_GINSI ; 
+            METRICS as METRIC_MAFFT_LINSI ;           
             METRICS as METRIC_MAFFT_SPARSECORE ; 
             METRICS as METRIC_MAFFT ;
             METRICS as METRIC_MSAPROBS ; 
@@ -174,6 +183,17 @@ workflow METRICS {
             
             metricFiles = METRIC_FFTNS1.out.metricFiles
         }
+        if (align_method == "MAFFT-GINSI"){
+            METRIC_LINSI(  flavour, 
+                        aligmentFile, 
+                        align_method, 
+                        tree_method, 
+                        bucket_size, 
+                        metricFile) 
+            
+            metricFiles = METRIC_LINSI.out.metricFiles
+        }        
+
         if (align_method == "MAFFT-GINSI"){
             METRIC_GINSI(  flavour, 
                         aligmentFile, 
@@ -253,6 +273,7 @@ include {   HOMOPLASY as HOMO_CLUSTALO ;
             HOMOPLASY as HOMO_FAMSA ; 
             HOMOPLASY as HOMO_MAFFT_FFTNS1 ;
             HOMOPLASY as HOMO_MAFFT_GINSI ; 
+            HOMOPLASY as HOMO_MAFFT_LINSI ; 
             HOMOPLASY as HOMO_MAFFT_SPARSECORE ; 
             HOMOPLASY as HOMO_MAFFT ;
             HOMOPLASY as HOMO_MSAPROBS ; 
@@ -299,6 +320,16 @@ workflow HOMOPLASY {
 
             homoFiles = HOMO_MAFFT_FFTNS1.out.homoFiles
         }
+        if (align_method == "MAFFT-LINSI"){
+            HOMO_MAFFT_LINSI(  flavour, 
+                        aligmentFile, 
+                        align_method, 
+                        tree_method, 
+                        bucket_size, 
+                        homoplasyFile) 
+
+            homoFiles = HOMO_MAFFT_GINSI.out.homoFiles
+        }
         if (align_method == "MAFFT-GINSI"){
             HOMO_MAFFT_GINSI(  flavour, 
                         aligmentFile, 
@@ -307,7 +338,7 @@ workflow HOMOPLASY {
                         bucket_size, 
                         homoplasyFile) 
 
-            homoFiles = HOMO_MAFFT_GINSI.out.homoFiles
+            homoFiles = HOMO_MAFFT_LINSI.out.homoFiles
         }
         if (align_method == "MAFFT-SPARSECORE"){
             HOMO_MAFFT_SPARSECORE(  flavour, 
@@ -378,6 +409,7 @@ include {   EASEL_INFO as EASEL_CLUSTALO ;
             EASEL_INFO as EASEL_FAMSA ; 
             EASEL_INFO as EASEL_MAFFT_FFTNS1 ;
             EASEL_INFO as EASEL_MAFFT_GINSI ; 
+            EASEL_INFO as EASEL_MAFFT_LINSI ; 
             EASEL_INFO as EASEL_MAFFT_SPARSECORE ; 
             EASEL_INFO as EASEL_MAFFT ;
             EASEL_INFO as EASEL_MSAPROBS ; 
@@ -419,6 +451,15 @@ workflow EASEL {
                         bucket_size)
 
             easelFiles = EASEL_MAFFT_FFTNS1.out.easelFiles
+        }
+        if (align_method == "MAFFT-LINSI"){
+            EASEL_MAFFT_LINSI(  flavour, 
+                        aligmentFile, 
+                        align_method, 
+                        tree_method, 
+                        bucket_size)
+
+            easelFiles = EASEL_MAFFT_LINSI.out.easelFiles
         }
         if (align_method == "MAFFT-GINSI"){
             EASEL_MAFFT_GINSI(  flavour, 
@@ -489,6 +530,7 @@ include {   GAPS_PROGRESSIVE as GAPS_CLUSTALO ;
             GAPS_PROGRESSIVE as GAPS_FAMSA ; 
             GAPS_PROGRESSIVE as GAPS_MAFFT_FFTNS1 ;
             GAPS_PROGRESSIVE as GAPS_MAFFT_GINSI ; 
+            GAPS_PROGRESSIVE as GAPS_MAFFT_LINSI ; 
             GAPS_PROGRESSIVE as GAPS_MAFFT_SPARSECORE ; 
             GAPS_PROGRESSIVE as GAPS_MAFFT ;
             GAPS_PROGRESSIVE as GAPS_MSAPROBS ; 
@@ -530,13 +572,13 @@ workflow GAPS {
                         bucket_size)
             gapFiles = GAPS_MAFFT_FFTNS1.out.gapFiles       
         }
-        if (align_method == "MAFFT-GINSI"){
-             GAPS_MAFFT_GINSI(  flavour, 
+        if (align_method == "MAFFT-LINSI"){
+             GAPS_MAFFT_LINSI(  flavour, 
                         aligmentFile, 
                         align_method, 
                         tree_method, 
                         bucket_size)
-            gapFiles = GAPS_MAFFT_GINSI.out.gapFiles              
+            gapFiles = GAPS_MAFFT_LINSI.out.gapFiles              
         } 
         if (align_method == "MAFFT-SPARSECORE"){
             GAPS_MAFFT_SPARSECORE(  flavour, 

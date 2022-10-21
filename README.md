@@ -1,13 +1,4 @@
 
-Repository modified by Claire McWhite. For evaluating new MSA technique. 
+This repository was adapted from [nf-benchmark](https://github.com/cbcrg/nf-benchmark) to evaluate [vcMSA](https://github.com/clairemcwhite/vcmsa) algorithm. 
 
-
-The original workflow was written by Edgar Garriga ([edgano](https://github.com/edgano)) and Jose Espinosa([JoseEspinosa](https://github.com/JoseEspinosa)) at the [Center for Genomic Regulation (CRG)](http://www.crg.eu).
-
-The authors who contributed to the analysis and manuscript are:
-
-* Edgar Garriga Nogales
-* Jose Espinosa Carrasco
-* Paolo Di Tommaso
-* Cedric Notredame
-
+The original workflow was written by Edgar Garriga ([edgano](https://github.com/edgano)) and Jose Espinosa([JoseEspinosa](https://github.com/JoseEspinosa)) at the [Center for Genomic Regulation (CRG)](http://www.crg.eu). 

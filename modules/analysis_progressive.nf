@@ -38,6 +38,15 @@ workflow ALIGNMENT {
             alignmentFile = PROG_MAFFT_FFTNS1.out.alignmentFile
             metrics = PROG_MAFFT_FFTNS1.out.metricFile
         }
+        if (align_method == "MAFFT-LINSI"){
+            PROG_MAFFT_LINSI(seqs_and_trees)
+
+            alignment_method = PROG_MAFFT_LINSI.out.alignMethod
+            tree_method = PROG_MAFFT_LINSI.out.treeMethod
+            alignmentFile = PROG_MAFFT_LINSI.out.alignmentFile
+            metrics = PROG_MAFFT_LINSI.out.metricFile
+        }
+
         if (align_method == "MAFFT-GINSI"){
             PROG_MAFFT_GINSI(seqs_and_trees)
 
