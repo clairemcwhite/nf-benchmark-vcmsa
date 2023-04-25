@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # What's happening here is that we're getting the location of conda in the subshell
-source \$(conda info --json | awk '/conda_prefix/ { gsub(/"|,/, "", \$2); print \$2 }')/bin/activate hf-transformers
+source \$(conda info --json | awk '/conda_prefix/ { gsub(/"|,/, "", \$2); print \$2 }')/bin/activate vcmsa_env
 
+nvidia-smi
 
 # Padding zero because embeddings were precomputed
-python3 /home/cmcwhite/transformer_infrastructure/hf_aligner2.py -i ${seqs} -e ${embeddings} -o ${id}.semantic.aln --model ${model} --exclude --seqsimthresh 0.7 --padding 0 -nb 
+#vcmsa -i ${seqs} -e ${embeddings} -o ${id}.semantic.aln --model ${model} --exclude --seqsimthresh 0.7 --padding 0 --mis  
+vcmsa -i ${seqs} -e ${embeddings} -o ${id}.semantic.aln --model ${model} --exclude --seqsimthresh ${seqsimthresh} --padding 0 --log INFO ${flags} 
 
 # Will create file if it doesn't exist
 #touch alignment_files_${id}.semantic/${id}.semantic.key_table.txt

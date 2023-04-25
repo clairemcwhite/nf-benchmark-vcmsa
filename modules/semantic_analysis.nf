@@ -13,9 +13,11 @@ workflow SEMANTIC_ANALYSIS {
     refs_ch
     model
     batch_correct
+    seqsimthresh
+    flags
      
   main:
-    SEMANTIC_ALIGNER (seqs_and_embeds, model, batch_correct)
+    SEMANTIC_ALIGNER (seqs_and_embeds, model, batch_correct, seqsimthresh, flags)
 
     if (params.evaluate){
       refs_ch

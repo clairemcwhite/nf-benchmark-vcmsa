@@ -60,6 +60,8 @@ params.layers = false
 params.heads = false
 params.padding = 10
 params.batch_correct = false
+params.seqsimthresh =  0.9
+params.flags = ""
 
 //CLUSTALW-QUICK,CLUSTALW
 //FAMSA-SLINK,FAMSA-SLINKmedoid,FAMSA-SLINKparttree,FAMSA-UPGMA,FAMSA-UPGMAmedoid,FAMSA-UPGMAparttree
@@ -130,7 +132,7 @@ include { TREE_GENERATION } from './modules/treeGeneration'   params(params)
 include { EMBED_GENERATION } from './modules/embedGeneration'   params(params)
 include { PROG_ANALYSIS } from './modules/prog_analysis'      params(params)
 include { SEMANTIC_ANALYSIS } from './modules/semantic_analysis'      params(params)
-//include { EVAL_ALIGNMENT } from './modules/modules_evaluateAlignment.nf'   params(params)
+include { EVAL_ALIGNMENT } from './modules/modules_evaluateAlignment.nf'   params(params)
 
 // Channels containing sequences
 if (params.seqs){
@@ -206,7 +208,7 @@ workflow PIPELINE {
        
 
 
-        SEMANTIC_ANALYSIS(seqs_and_embeds, refs_ch, params.model, params.batch_correct)
+        SEMANTIC_ANALYSIS(seqs_and_embeds, refs_ch, params.model, params.batch_correct, params.seqsimthresh, params.flags)
         alignment_semantic_r = SEMANTIC_ANALYSIS.out.alignment
     }
 

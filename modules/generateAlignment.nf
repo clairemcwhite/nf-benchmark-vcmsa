@@ -12,12 +12,16 @@ process SEMANTIC_ALIGNER {
     publishDir "${params.outdir}/alignments", pattern: '*.aln', mode: "copy"
     publishDir "${params.outdir}/alignment_files/", pattern: 'alignment*/*', mode: "copy"
     errorStrategy 'ignore'
+    //clusterOptions '--ntasks 1 --gres=gpu:1'
 
 
     input:
     tuple val(id), path(seqs), path(embeddings)
     path(model)
     val(batch_correct)
+    val(seqsimthresh)
+    val(flags)
+    
 
     output:
     //val align_method, emit: alignMethod
