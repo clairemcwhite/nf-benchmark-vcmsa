@@ -1,0 +1,23 @@
+Object sequence_embeddings dimensions: (20, 128)
+Object aa_embeddings dimensions: (20, 185, 128)
+Contains sequences:
+seq0001
+seq0002
+seq0003
+seq0187
+seq0210
+seq0310
+seq0366
+seq0437
+seq0577
+seq0584
+seq0606
+seq0651
+seq0730
+seq0733
+seq0788
+seq0884
+seq0898
+seq0951
+seq0980
+seq0994

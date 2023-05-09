@@ -1,0 +1,24 @@
+{
+ 
+  "seqs": "/scratch/gpfs/cmcwhite/aln_datasets/quantest2/QuanTest2/Test/*.vie.20seqs.fasta",
+  "refs": "/scratch/gpfs/cmcwhite/aln_datasets/quantest2/QuanTest2/Ref/*.ref",
+   "trees":false,
+   "tree_methods" : "MAFFT-PARTTREE0",
+   "align_methods": "CLUSTALO,MAFFT-FFTNS1,MAFFT-SPARSECORE,MAFFT-GINSI,TCOFFEE,MUSCLE,MSAPROBS,FAMSA,PROBCONS,UPP,PSI",
+      "layers" : "-16 -15 -14 -13 -12 -11 -10 -9 -8 -7 -6 -5 -4 -3 -2 -1",
+   "biotech": true,
+   "evaluate": false,
+   "gapCount": true,
+   "metrics": true,
+   "flags": "-mnc",
+   "seqsimthresh": 0.9,
+   "outdir": "/scratch/gpfs/cmcwhite/aln_comparison/aln_evaluate_20_nopca_16layer_t5_padding10_thr90_nobc_mnc_oldclust",
+   "model" : "/scratch/gpfs/cmcwhite/prot_t5_xl_half_uniref50-enc",
+   "padding" : 10,
+   "batch_correct" : false,
+   "progressive_align": false,
+   "regressive_align": false,
+   "semantic_align": true,
+   "easel": true,
+   "cpus":1
+}
