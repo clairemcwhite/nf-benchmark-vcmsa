@@ -7,6 +7,8 @@ nvidia-smi
 
 # Padding zero because embeddings were precomputed
 #vcmsa -i ${seqs} -e ${embeddings} -o ${id}.semantic.aln --model ${model} --exclude --seqsimthresh 0.7 --padding 0 --mis  
+echo ${flags}
+which vcmsa
 vcmsa -i ${seqs} -e ${embeddings} -o ${id}.semantic.aln --model ${model} --exclude --seqsimthresh ${seqsimthresh} --padding 0 --log INFO ${flags} 
 
 # Will create file if it doesn't exist
